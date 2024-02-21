@@ -1,0 +1,17 @@
+name: Experiments
+
+on:
+  pull_request_target:
+    types: [opened, edited]
+
+jobs:
+  experiment_one:
+    runs-on: ubuntu-latest
+    steps:
+      - name: foo
+        run: |
+          echo "repo: ${{ inputs.pull_request.repository }}"
+          if echo "${{ inputs.pull_request.body }}" | grep -q 'http://ticket.example.org/ABCD-1234'; then
+              echo "::warning title=Missing ticket ID::Your PR description is missing the ticket ID"
+              exit 1
+          fi
