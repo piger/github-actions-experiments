@@ -1,11 +1,8 @@
 name: Experiments
 
 on:
-  # pull_request:
   pull_request_target:
-    types:
-      - opened
-      - edited
+    types: [opened, edited]
 
 jobs:
   experiment_one:
