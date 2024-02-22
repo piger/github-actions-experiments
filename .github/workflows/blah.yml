@@ -4,9 +4,6 @@ on:
   pull_request_target:
     types: [opened, synchronize, reopened, edited, ready_for_review]
 
-concurrency:
-  group: ${{ github.event.pull_request.id }}
-
 jobs:
   validate_ticket:
     name: "Contains ticket ID"
@@ -22,9 +19,10 @@ jobs:
     name: "Contains correct alignment"
     runs-on: ubuntu-latest
     steps:
-      - name: foo
+      - name: bar
         run: |
           echo "::warning title=Missing alignment::Your PR description is missing the alignment"
           echo "You did not provide an alignment"
           exit 1
-        if: contains(github.event.pull_request.body, '- Alignment: Lawful/Neutral/Chaotic')
+        # quoting this because YAML is terrible: https://github.com/actions/runner/issues/1019
+        if: "${{ contains(github.event.pull_request.body, '- Alignment: Lawful/Neutral/Chaotic') }}"
