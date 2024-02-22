@@ -1,4 +1,4 @@
-name: Experiments
+name: PR validation
 
 on:
   pull_request_target:
@@ -6,6 +6,7 @@ on:
 
 jobs:
   experiment_one:
+    name: "Contains ticket ID"
     runs-on: ubuntu-latest
     steps:
       - name: foo
