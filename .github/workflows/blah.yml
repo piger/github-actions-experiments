@@ -8,7 +8,7 @@ concurrency:
   group: ${{ github.event.pull_request.id }}
 
 jobs:
-  experiment_one:
+  validate_ticket:
     name: "Contains ticket ID"
     runs-on: ubuntu-latest
     steps:
@@ -18,3 +18,13 @@ jobs:
           echo "You did not provide a ticket ID"
           exit 1
         if: contains(github.event.pull_request.body, '- http://ticket.example.org/ABCD-1234')
+  validate_alignment:
+    name: "Contains correct alignment"
+    runs-on: ubuntu-latest
+    steps:
+      - name: foo
+        run: |
+          echo "::warning title=Missing alignment::Your PR description is missing the alignment"
+          echo "You did not provide an alignment"
+          exit 1
+        if: contains(github.event.pull_request.body, '- Alignment: Lawful/Neutral/Chaotic')
