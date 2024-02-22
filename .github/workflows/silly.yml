@@ -1,0 +1,13 @@
+name: Useless test
+
+on:
+  pull_request:
+
+jobs:
+  lallero:
+    name: "Waste of time"
+    runs-on: ubuntu-latest
+    steps:
+      - name: giuseppe
+        run: |
+          uname -a
